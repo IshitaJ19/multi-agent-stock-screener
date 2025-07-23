@@ -5,7 +5,9 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "google-adk>=1.7.0",
     "google-genai>=1.26.0",
+    "streamlit>=1.47.0",
     "yfinance-mcp @ file:///Users/ishita/Documents/git-projects/yfinance-mcp",
 ]
 
@@ -24,4 +26,4 @@ build-backend = "setuptools.build_meta"
 where = ["src"]
 
 [project.scripts]
-start = "stock_recommender.main:app"
+start = "stock_screener.main:app"

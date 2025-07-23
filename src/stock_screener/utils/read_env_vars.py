@@ -3,13 +3,12 @@ import os
 from typing import Union
 from pathlib import Path
 
-from stock_recommender.utils.paths import CONFIGS_DIR
+from stock_screener.utils.paths import CONFIGS_DIR
 
 
 class EnvVars:
     def __init__(self, config_path: Union[str, Path]=CONFIGS_DIR / "env.toml"):
         """Initialize environment variables from a TOML file."""
-        print(CONFIGS_DIR)
         with open(config_path, "rb") as f:
             env_vars = tomllib.load(f)
 

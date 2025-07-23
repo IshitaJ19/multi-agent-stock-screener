@@ -1,2 +1,6 @@
-# multi-agent-stock-recommender
-An intelligent Stock Recommender system powered by LangChain, A2A and MCP
+# multi-agent-stock-screener
+An intelligent Stock Screener system powered by A2A and MCP
+
+# To run
+
+`uv run streamlit run src/stock_screener/app.py`
