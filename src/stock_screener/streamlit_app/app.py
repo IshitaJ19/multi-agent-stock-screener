@@ -4,7 +4,7 @@ import asyncio
 from google.adk.sessions import InMemorySessionService
 from google.adk.runners import Runner
 
-from stock_screener.agents.main_agent import get_agent, ask_agent
+from stock_screener.streamlit_app.runnable import get_agent, ask_agent
 
 st.set_page_config(page_title="Stock Screener", layout="centered")
 
@@ -64,4 +64,17 @@ with buttons[2]:
 
 if st.session_state.response:
     st.markdown("### Response:")
-    st.markdown(st.session_state.response)
+    # st.markdown(st.session_state.response)
+    # print(st.session_state.response)
+
+    fig = None
+    if st.session_state.response.startswith("```"):
+        code = st.session_state.response.strip("`").split("python")[-1]
+        code = code.split("fig.show()")[0]
+
+        exec(code)
+        st.plotly_chart(fig, use_container_width=True)
+
+    else:
+        st.markdown(st.session_state.response)
+

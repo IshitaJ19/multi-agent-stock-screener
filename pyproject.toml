@@ -1,12 +1,16 @@
 [project]
-name = "stock-recommender"
+name = "stock-screener"
 version = "0.1.0"
-description = "Add your description here"
+description = "AI-powered Stock Screener"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "a2a-sdk>=0.2.16",
     "google-adk>=1.7.0",
     "google-genai>=1.26.0",
+    "gradio>=5.38.2",
+    "plotly>=6.2.0",
+    "protobuf==5.29.5",
     "streamlit>=1.47.0",
     "yfinance-mcp @ file:///Users/ishita/Documents/git-projects/yfinance-mcp",
 ]

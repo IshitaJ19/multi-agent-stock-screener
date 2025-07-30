@@ -9,7 +9,6 @@ from google.genai import types
 
 from stock_screener.utils.read_env_vars import ENV
 
-
 ENV.export_google_api_key()
 
 APP_NAME = "StockScreener"
@@ -21,21 +20,21 @@ async def get_agent(
 
     toolset = MCPToolset(
         connection_params=StreamableHTTPServerParams(url=mcp_url),
-        tool_filter=[
-            "get_gross_margins",
-            "screen_stocks",
-            "get_market_cap",
-            "get_ticker_financials",
-            "get_stock_info"
-        ]
     )
 
     root_agent = LlmAgent(
         name="MainAgent",
         description="Main agent for stock screening.",
         instruction="""You are a financial assistant. 
-        Use the tools provided to answer stock-related queries. Use tabular format wherever possible. 
-        Recommend stock when asked, and let the user know that the advice is for educational purposes only.""",
+            Use the tools provided to answer stock-related queries. Use tabular format wherever possible. 
+            Recommend stock when asked, and let the user know that the advice is for educational purposes only.
+            If user asks for market sentiment or news, use the news tool to fetch relevant information and summarize it.
+            Use tabular format to present news summary wherever possible.
+            When asked to plot a chart, provide Python Plotly code to plot the chart 
+            WITHOUT any fluff, ONLY code,
+            WITHOUT the fig.show() at the end. No need to run it.
+            Ensure the generated code assigns the Plotly figure to a variable named 'fig' and 
+            only uses 'plotly.graph_objects as go' and 'pandas as pd'.""",
         model="gemini-2.5-flash",
         tools=[toolset],
         include_contents="default",
@@ -101,6 +100,7 @@ async def run_agent():
                     elif event.actions and event.actions.escalate: # Handle potential errors/escalations
                         final_response_text = f"Agent escalated: {event.error_message or 'No specific message.'}"
                         break
+                    
 
             print(f"Agent: {final_response_text}")
 
@@ -145,6 +145,9 @@ async def ask_agent(user_query: str, session, runner) -> str:
                     final_response_text = f"Agent escalated: {event.error_message or 'No specific message.'}"
                 
                 await runner.close()
+
+                print(event.content)
+
                 return final_response_text
 
     except asyncio.CancelledError:
