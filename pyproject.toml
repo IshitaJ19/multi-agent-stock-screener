@@ -1,0 +1,33 @@
+[project]
+name = "stock-screener"
+version = "0.1.0"
+description = "AI-powered Stock Screener"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "a2a-sdk>=0.2.16",
+    "google-adk>=1.7.0",
+    "google-genai>=1.26.0",
+    "gradio>=5.38.2",
+    "plotly>=6.2.0",
+    "protobuf==5.29.5",
+    "streamlit>=1.47.0",
+    "yfinance-mcp @ file:///Users/ishita/Documents/git-projects/yfinance-mcp",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.4.1",
+    "pytest-asyncio>=1.1.0",
+    "ruff>=0.12.3",
+]
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project.scripts]
+start = "stock_screener.main:app"

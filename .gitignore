@@ -77,6 +77,8 @@ target/
 
 # Jupyter Notebook
 .ipynb_checkpoints
+*.ipynb
+notebooks
 
 # IPython
 profile_default/
@@ -172,3 +174,5 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+configs/*.toml 
