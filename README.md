@@ -37,3 +37,11 @@ TECH_ANALYST="http://127.0.0.1:9999"  # <- A2A server endpoint for the Technical
 **NOTE:** Only available for a local Stock Screener agent.
 
 `uv run streamlit run src/stock_screener/streamlit_app/app.py`
+
+
+## References
+- https://github.com/jlowin/fastmcp
+- https://google.github.io/adk-docs/
+- https://a2a-protocol.org/dev/sdk/python/
+- https://github.com/a2aproject/a2a-python
+- https://github.com/a2aproject/a2a-samples/tree/main
